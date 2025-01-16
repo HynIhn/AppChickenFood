@@ -56,6 +56,18 @@ class _DiscountPageState extends State<DiscountPage> {
       'description': 'Hạn sử dụng 31-12-2025',
       'status': '',
     },
+    {
+      'image': 'assets/images/postersale2.jpg',
+      'title': 'Chicken Day - Mua 2 Tặng 2 Gà rán',
+      'description': 'Hạn sử dụng 31-12-2025',
+      'status': 'Hiện không có sẵn',
+    },
+    {
+      'image': 'assets/images/postersale2.jpg',
+      'title': '[Ưu Đãi Thứ Năm] Mua 1 EVM Tặng 1 Cheeseburger',
+      'description': 'Hạn sử dụng 31-12-2025',
+      'status': '',
+    },
   ];
 
   Widget _buildSectionHeader(String title, Widget page) {
@@ -80,7 +92,8 @@ class _DiscountPageState extends State<DiscountPage> {
             'Xem tất cả',
             style: TextStyle(
               decoration: TextDecoration.underline,
-              color: Colors.blue,
+              decorationColor: mainColor,
+              color: mainColor,
               fontSize: 13,
             ),
           ),
@@ -105,13 +118,17 @@ class _DiscountPageState extends State<DiscountPage> {
                 SlideFromRightPageRoute(page: MyHomePage()), // Chuyển hướng đến trang khác
               );
             },
-          child: Container(
-          width: 220,
-          child: RewardCard(
-              image: reward['image']!,
-              title: reward['title']!,
-              points: reward['points']!,
-            ),)
+
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Container(
+            width: 220,
+            child: RewardCard(
+                image: reward['image']!,
+                title: reward['title']!,
+                points: reward['points']!,
+              ),),
+          )
           );
         },
       ),
@@ -125,63 +142,47 @@ class _DiscountPageState extends State<DiscountPage> {
       itemCount: discounts.length,
       itemBuilder: (context, index) {
         final discount = discounts[index];
-        return Container(
-          margin: const EdgeInsets.symmetric(vertical: 8),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.2),
-                blurRadius: 8,
-                spreadRadius: 2,
-              ),
-            ],
-          ),
-          child: Row(
-            children: [
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(16),
-                  bottomLeft: Radius.circular(16),
-                ),
-                child: Image.asset(
-                  discount['image'],
-                  height: 80, // Chiều cao của hình ảnh
-                  width: 80, // Chiều rộng của hình ảnh
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(width: 8),
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        discount['title'],
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        discount['description'],
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    ],
+        return
+           Card(
+            elevation: 4,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Container(
+              width: 300,
+              padding: EdgeInsets.all(16),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(14), // Bo góc ảnh
+                    child: Image.asset(
+                      discount['image'], // Đường dẫn ảnh
+                      height: 120,
+                      width: double.infinity, // Đảm bảo ảnh full width
+                      fit: BoxFit.cover, // Điều chỉnh hiển thị ảnh
+                    ),
                   ),
-                ),
+                  SizedBox(height: 16),
+                  Text(
+                    discount['title'],
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(height: 8),
+                  Text(
+                    discount['description'],
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Colors.grey[600],
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-        );
+            ),
+          );
       },
     );
   }
