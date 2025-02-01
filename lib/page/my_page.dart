@@ -1,5 +1,6 @@
 import 'package:ChickenFood/Theme/color_themes.dart';
 import 'package:ChickenFood/page/disscount_page.dart';
+import 'package:ChickenFood/page/find_more_page.dart';
 import 'package:ChickenFood/page/home_page.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           HomePage(),
           DiscountPage(),
+          HomePage(),
+          HomePage(),
+          FindMorePage(),
         ],
       ),
       bottomNavigationBar: _buildAnimatedBottomNavBar(),
